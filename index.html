@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriel Morais — Full Stack & AI Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --preto:#0a0a0a;
+  --escuro:#111111;
+  --card:#181818;
+  --card2:#1f1f1f;
+  --borda:rgba(255,255,255,0.07);
+  --borda2:rgba(255,255,255,0.15);
+  --amarelo:#f5c518;
+  --verde:#00a651;
+  --branco:#f5f5f0;
+  --sub:rgba(245,245,240,0.45);
+  --sub2:rgba(245,245,240,0.25);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--preto);color:var(--branco);overflow-x:hidden}
+
+/* ══ SCROLLBAR ══ */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--preto)}
+::-webkit-scrollbar-thumb{background:var(--amarelo)}
+::selection{background:rgba(245,197,24,.2);color:var(--amarelo)}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--borda);
+  transition:all .3s;
+}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:var(--branco);text-decoration:none;letter-spacing:-.01em}
+.nav-logo span{color:var(--amarelo)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.82rem;font-weight:600;color:var(--sub);text-decoration:none;letter-spacing:.02em;transition:color .2s}
+.nav-links a:hover{color:var(--branco)}
+.nav-cta{padding:9px 22px;background:var(--amarelo);color:#000;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.nav-cta:hover{background:#fff}
+
+/* ══ HERO ══ */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:120px 48px 80px;
+  max-width:1200px;margin:0 auto;
+  gap:80px;
+}
+.hero-left{flex:1}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.2);
+  border-radius:2px;padding:6px 14px;
+  font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--amarelo);margin-bottom:28px;
+}
+.hero-tag .tag-dot{width:6px;height:6px;border-radius:50%;background:var(--amarelo);animation:tagblink 2s ease infinite}
+@keyframes tagblink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-nome{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:900;line-height:.92;
+  color:var(--branco);
+  margin-bottom:20px;
+  letter-spacing:-.03em;
+}
+.hero-nome em{color:var(--amarelo);font-style:italic}
+.hero-desc{
+  font-size:1.05rem;color:var(--sub);line-height:1.75;
+  max-width:480px;margin-bottom:40px;font-weight:400;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-prim{
+  padding:14px 32px;background:var(--amarelo);color:#000;
+  font-size:.9rem;font-weight:700;border:none;cursor:pointer;
+  transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-prim:hover{background:#fff;transform:translateY(-2px)}
+.btn-sec{
+  padding:14px 32px;background:transparent;color:var(--branco);
+  font-size:.9rem;font-weight:600;
+  border:1px solid var(--borda2);cursor:pointer;
+  transition:all .25s;text-decoration:none;
+}
+.btn-sec:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.3)}
+
+.hero-right{flex-shrink:0}
+.hero-photo-frame{
+  width:340px;height:420px;
+  position:relative;
+}
+.hero-photo-frame::before{
+  content:'';position:absolute;
+  bottom:-14px;right:-14px;
+  width:100%;height:100%;
+  border:2px solid var(--amarelo);
+  opacity:.25;
+  transition:all .3s;
+}
+.hero-photo-frame:hover::before{bottom:-8px;right:-8px;opacity:.5}
+.hero-photo-frame img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top;
+  display:block;
+  filter:grayscale(20%);
+  transition:filter .3s;
+}
+.hero-photo-frame:hover img{filter:grayscale(0%)}
+.hero-photo-placeholder{
+  width:100%;height:100%;
+  background:var(--card);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+}
+.hero-photo-placeholder span{font-family:'Fraunces',serif;font-size:5rem;font-weight:900;color:rgba(245,197,24,.15)}
+.hero-stats{display:flex;gap:32px;margin-top:48px;padding-top:40px;border-top:1px solid var(--borda)}
+.hs-item .hs-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--amarelo);display:block;line-height:1}
+.hs-item .hs-label{font-size:.75rem;color:var(--sub);font-weight:500;margin-top:3px;display:block;letter-spacing:.02em}
+
+/* ══ TICKER ══ */
+.ticker-wrap{border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);overflow:hidden;padding:11px 0;background:var(--escuro)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 30s linear infinite}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-size:.78rem;font-weight:600;color:var(--sub2);padding:0 28px;display:flex;align-items:center;gap:14px;letter-spacing:.04em}
+.ticker-sep{color:var(--amarelo);font-size:.5rem}
+
+/* ══ SEÇÕES ══ */
+.section{padding:100px 48px;max-width:1200px;margin:0 auto}
+.s-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.s-eyebrow-line{width:32px;height:2px;background:var(--amarelo)}
+.s-eyebrow-txt{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--amarelo)}
+.s-titulo{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4vw,3.5rem);font-weight:900;
+  color:var(--branco);line-height:1.0;margin-bottom:56px;letter-spacing:-.02em;
+}
+.s-titulo .dim{color:var(--sub2)}
+
+/* ══ SOBRE ══ */
+.sobre-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:80px;align-items:start}
+.sobre-txt{font-size:1rem;line-height:1.85;color:var(--sub);font-weight:400}
+.sobre-txt p{margin-bottom:18px}
+.sobre-txt strong{color:var(--branco);font-weight:600}
+.sobre-txt .hl{color:var(--amarelo);font-weight:600}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.stat-blk{
+  background:var(--card);border:1px solid var(--borda);padding:24px 20px;
+  transition:all .3s;
+}
+.stat-blk:hover{border-color:rgba(245,197,24,.25);background:var(--card2)}
+.stat-blk .sn{font-family:'Fraunces',serif;font-size:2.8rem;font-weight:900;color:var(--amarelo);display:block;line-height:1}
+.stat-blk .sd{font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub2);margin-top:8px;display:block}
+
+/* ══ STACK ══ */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px}
+.stack-card{
+  background:var(--card);border:1px solid var(--borda);padding:26px 22px;
+  transition:all .35s;
+}
+.stack-card:hover{border-color:rgba(245,197,24,.2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.stack-card-label{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amarelo);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.stack-card-label::before{content:'';width:14px;height:2px;background:var(--amarelo)}
+.tech-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.9rem;color:var(--sub);transition:color .2s}
+.tech-row:last-child{border-bottom:none}
+.stack-card:hover .tech-row{color:var(--branco)}
+.tech-row img{width:20px;height:20px;object-fit:contain;flex-shrink:0;opacity:.7}
+.stack-card:hover .tech-row img{opacity:1}
+.tech-row svg{width:20px;height:20px;flex-shrink:0}
+
+/* ══ PROJETOS ══ */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px;margin-bottom:2px}
+
+/* Card normal */
+.proj-card{
+  background:var(--card);border:1px solid var(--borda);padding:32px;
+  transition:all .4s;cursor:pointer;position:relative;overflow:hidden;
+}
+.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,197,24,.03) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.proj-card:hover{border-color:rgba(245,197,24,.2);transform:translateY(-6px);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.proj-card:hover::before{opacity:1}
+.proj-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px}
+.proj-num{font-size:.7rem;font-weight:700;letter-spacing:2px;color:var(--sub2);text-transform:uppercase}
+.proj-arrow{width:32px;height:32px;border:1px solid var(--borda);display:flex;align-items:center;justify-content:center;color:var(--sub2);font-size:14px;transition:all .3s}
+.proj-card:hover .proj-arrow{border-color:var(--amarelo);color:var(--amarelo);transform:translate(3px,-3px)}
+.proj-title{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;color:var(--branco);margin-bottom:12px;line-height:1.2}
+.proj-desc{font-size:.88rem;color:var(--sub);line-height:1.75;margin-bottom:22px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px}
+.p-tag{font-size:.7rem;font-weight:600;letter-spacing:.04em;color:rgba(245,197,24,.5);border:1px solid rgba(245,197,24,.12);padding:3px 10px;transition:all .25s}
+.proj-card:hover .p-tag{border-color:rgba(245,197,24,.3);color:var(--amarelo)}
+
+/* Card GeoQuiz — DESTAQUE */
+.proj-card-destaque{
+  background:var(--amarelo);border:none;padding:32px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:all .4s;
+  grid-column:span 2;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+}
+.proj-card-destaque:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(245,197,24,.2)}
+
+.pcd-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.1);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,.6);margin-bottom:14px}
+.pcd-titulo{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:#000;line-height:1.05;margin-bottom:12px}
+.pcd-desc{font-size:.92rem;color:rgba(0,0,0,.65);line-height:1.7;margin-bottom:24px}
+.btn-entrar{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;background:#000;color:var(--amarelo);
+  font-size:.88rem;font-weight:700;border:none;cursor:pointer;
+  transition:all .25s;
+}
+.btn-entrar:hover{background:var(--preto);transform:translateX(4px)}
+.pcd-right{display:flex;flex-direction:column;gap:10px}
+.pcd-feat{
+  background:rgba(0,0,0,.08);border-radius:4px;padding:12px 16px;
+  display:flex;align-items:center;gap:12px;
+  font-size:.85rem;font-weight:600;color:rgba(0,0,0,.7);
+}
+.pcd-feat .pf-icon{font-size:1.2rem;flex-shrink:0}
+.pcd-preco-badge{
+  background:#000;border-radius:4px;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pcd-preco-badge .pp-label{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,197,24,.5)}
+.pcd-preco-badge .pp-val{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--amarelo)}
+
+/* Proj more bar */
+.proj-more{
+  background:var(--card);border:1px solid var(--borda);padding:26px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .3s;
+}
+.proj-more:hover{border-color:var(--borda2)}
+.pm-label{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:var(--sub);line-height:1.3}
+.pm-label strong{color:var(--branco)}
+.pm-num{font-family:'Fraunces',serif;font-size:4rem;font-weight:900;color:var(--borda2);line-height:1}
+
+/* ══ DIFERENCIAIS ══ */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.diff-card{
+  background:var(--card);border:1px solid var(--borda);padding:32px 28px;
+  transition:all .35s;position:relative;overflow:hidden;
+}
+.diff-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--amarelo);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.diff-card:hover{border-color:var(--borda2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.diff-card:hover::after{transform:scaleX(1)}
+.diff-icon{font-size:2rem;margin-bottom:18px;display:block}
+.diff-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--branco);margin-bottom:10px}
+.diff-desc{font-size:.88rem;color:var(--sub);line-height:1.65}
+
+/* ══ CONTATO ══ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.cf-field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.cf-label{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub2)}
+.cf-input,.cf-textarea{
+  background:var(--card);border:1px solid var(--borda);
+  color:var(--branco);padding:13px 16px;
+  font-family:'DM Sans',sans-serif;font-size:.95rem;
+  outline:none;transition:border-color .25s;
+}
+.cf-input:focus,.cf-textarea:focus{border-color:rgba(245,197,24,.4)}
+.cf-input::placeholder,.cf-textarea::placeholder{color:var(--sub2)}
+.cf-textarea{height:120px;resize:none}
+.cf-submit{
+  padding:14px 32px;background:var(--amarelo);color:#000;
+  border:none;font-family:'DM Sans',sans-serif;
+  font-size:.9rem;font-weight:700;cursor:pointer;
+  transition:all .25s;
+}
+.cf-submit:hover{background:#fff;transform:translateY(-2px)}
+.contact-links{display:flex;flex-direction:column;gap:2px;margin-top:0}
+.c-link{
+  display:flex;align-items:center;gap:16px;padding:18px 20px;
+  background:var(--card);border:1px solid var(--borda);
+  text-decoration:none;color:var(--sub);transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.c-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--amarelo);transform:scaleY(0);transition:transform .3s;transform-origin:bottom}
+.c-link:hover{border-color:rgba(245,197,24,.2);color:var(--branco);transform:translateX(4px)}
+.c-link:hover::before{transform:scaleY(1)}
+.c-link-icon{width:38px;height:38px;border:1px solid var(--borda);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .3s}
+.c-link:hover .c-link-icon{border-color:rgba(245,197,24,.3)}
+.c-link-body{flex:1}
+.c-link-lbl{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub2);margin-bottom:3px}
+.c-link-val{font-size:.9rem;font-weight:500}
+.c-link-arr{color:var(--sub2);transition:all .3s}
+.c-link:hover .c-link-arr{color:var(--amarelo);transform:translateX(4px)}
+
+/* ══ FOOTER ══ */
+footer{border-top:1px solid var(--borda);padding:28px 48px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--sub2)}
+.footer-logo span{color:var(--amarelo)}
+.footer-copy{font-size:.78rem;color:var(--sub2)}
+
+/* ══ DIVIDER ══ */
+.divider{height:1px;background:var(--borda);margin:0 48px}
+
+/* ══ FADE ANIMATIONS ══ */
+.fade{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fade.vis{opacity:1;transform:none}
+.fd1{transition-delay:.08s}.fd2{transition-delay:.16s}.fd3{transition-delay:.24s}.fd4{transition-delay:.32s}
+
+/* ══ MODAL GEOQUIZ ══ */
+#modal-geo{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+#modal-geo.aberto{opacity:1;pointer-events:all}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.modal-box{
+  position:relative;z-index:1;
+  background:var(--escuro);
+  width:100%;max-width:860px;
+  max-height:90vh;overflow-y:auto;
+  border:1px solid rgba(245,197,24,.2);
+  animation:modalIn .4s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes modalIn{from{transform:translateY(40px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.modal-hero{
+  background:var(--amarelo);padding:48px 40px 40px;
+  position:relative;overflow:hidden;
+}
+.modal-hero::after{content:'🇧🇷';position:absolute;right:-10px;bottom:-20px;font-size:8rem;opacity:.08;pointer-events:none}
+.modal-close{
+  position:absolute;top:18px;right:18px;
+  width:36px;height:36px;background:rgba(0,0,0,.15);border:none;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;cursor:pointer;color:#000;transition:background .2s;
+}
+.modal-close:hover{background:rgba(0,0,0,.3)}
+.modal-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.1);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,.55);margin-bottom:12px}
+.modal-titulo{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#000;line-height:.95;margin-bottom:12px}
+.modal-sub{font-size:1rem;color:rgba(0,0,0,.65);line-height:1.6;max-width:540px}
+
+/* Conteúdo do modal */
+.modal-body{padding:40px}
+
+/* Features */
+.modal-features{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:32px}
+.mf-card{background:var(--card);border:1px solid var(--borda);padding:20px 18px;transition:border-color .2s}
+.mf-card:hover{border-color:rgba(245,197,24,.2)}
+.mf-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.mf-titulo{font-family:'Fraunces',serif;font-size:.95rem;font-weight:900;color:var(--branco);margin-bottom:6px}
+.mf-desc{font-size:.78rem;color:var(--sub);line-height:1.55}
+
+/* Planos */
+.modal-planos-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.modal-planos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.plano-card{background:var(--card);border:2px solid var(--borda);padding:28px 24px;transition:all .3s;position:relative}
+.plano-card:hover{transform:translateY(-3px)}
+.plano-card.destaque{border-color:var(--amarelo);background:rgba(245,197,24,.04)}
+.plano-tag{font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--sub2);margin-bottom:10px;display:block}
+.plano-card.destaque .plano-tag{color:var(--amarelo)}
+.plano-nome{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.plano-preco{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:900;color:var(--amarelo);line-height:1;margin-bottom:4px}
+.plano-periodo{font-size:.78rem;color:var(--sub);margin-bottom:18px;display:block}
+.plano-lista{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.plano-lista li{display:flex;align-items:flex-start;gap:8px;font-size:.83rem;color:var(--sub);line-height:1.4}
+.plano-lista li::before{content:'✓';color:var(--verde);font-weight:700;flex-shrink:0;margin-top:1px}
+.plano-lista li.nao{opacity:.4;text-decoration:line-through}
+.plano-lista li.nao::before{content:'✕';color:#666}
+.btn-plano{
+  width:100%;padding:12px;border:none;
+  font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.plano-card .btn-plano{background:var(--card2);color:var(--branco);border:1px solid var(--borda2)}
+.plano-card .btn-plano:hover{background:var(--branco);color:#000}
+.plano-card.destaque .btn-plano{background:var(--amarelo);color:#000}
+.plano-card.destaque .btn-plano:hover{background:#fff}
+.plano-mais-vendido{
+  position:absolute;top:-1px;right:20px;
+  background:var(--amarelo);color:#000;
+  font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;
+}
+
+/* Depoimentos */
+.modal-dep-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.modal-deps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.dep-card{background:var(--card);border:1px solid var(--borda);padding:20px;border-left:3px solid var(--amarelo)}
+.dep-estrelas{color:var(--amarelo);font-size:.8rem;margin-bottom:8px;letter-spacing:2px}
+.dep-texto{font-size:.82rem;color:var(--sub);line-height:1.6;margin-bottom:14px;font-style:italic}
+.dep-autor{display:flex;align-items:center;gap:10px}
+.dep-av{width:34px;height:34px;border-radius:50%;background:var(--amarelo);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900;color:#000;flex-shrink:0}
+.dep-nome{font-size:.8rem;font-weight:700;color:var(--branco)}
+.dep-cargo{font-size:.7rem;color:var(--sub2)}
+
+/* CTA modal */
+.modal-cta{background:var(--amarelo);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal-cta-txt h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:#000;margin-bottom:4px}
+.modal-cta-txt p{font-size:.85rem;color:rgba(0,0,0,.6)}
+.btn-cta-modal{
+  padding:14px 32px;background:#000;color:var(--amarelo);
+  font-size:.9rem;font-weight:700;border:none;cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-cta-modal:hover{background:var(--escuro)}
+
+/* ══ CARD DRAWING AIR DESTAQUE ══ */
+.proj-card-air-destaque{
+  background:linear-gradient(135deg,#1a0a2e 0%,#0d1020 50%,#0a0a1a 100%);
+  border:1px solid rgba(138,43,226,.35);padding:32px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:all .4s;
+  grid-column:span 2;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+}
+.proj-card-air-destaque::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(138,43,226,.06) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.proj-card-air-destaque:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(138,43,226,.2);border-color:rgba(138,43,226,.6)}
+.proj-card-air-destaque:hover::before{opacity:1}
+.pad-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(138,43,226,.15);border:1px solid rgba(138,43,226,.3);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#b06fff;margin-bottom:14px}
+.pad-titulo{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:var(--branco);line-height:1.05;margin-bottom:12px}
+.pad-desc{font-size:.92rem;color:rgba(245,245,240,.55);line-height:1.7;margin-bottom:24px}
+.btn-ver-air-dest{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;background:#b06fff;color:#000;
+  font-size:.88rem;font-weight:700;border:none;cursor:pointer;
+  transition:all .25s;
+}
+.btn-ver-air-dest:hover{background:#fff;transform:translateX(4px)}
+.pad-right{display:flex;flex-direction:column;gap:10px}
+.pad-feat{
+  background:rgba(138,43,226,.08);border:1px solid rgba(138,43,226,.15);border-radius:4px;padding:12px 16px;
+  display:flex;align-items:center;gap:12px;
+  font-size:.85rem;font-weight:600;color:rgba(245,245,240,.6);
+}
+.proj-card-air-destaque:hover .pad-feat{color:rgba(245,245,240,.85);border-color:rgba(138,43,226,.3)}
+.paf-icon{font-size:1.2rem;flex-shrink:0}
+.pad-tech-badge{
+  background:rgba(0,0,0,.4);border:1px solid rgba(138,43,226,.2);border-radius:4px;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pt-label{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(176,111,255,.5)}
+.pt-val{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:500;color:#b06fff}
+
+/* ══ MODAL AIR DRAWING ══ */
+#modal-air{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+#modal-air.aberto{opacity:1;pointer-events:all}
+.modal-air-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.modal-air-box{
+  position:relative;z-index:1;
+  background:var(--escuro);
+  width:100%;max-width:860px;
+  max-height:90vh;overflow-y:auto;
+  border:1px solid rgba(138,43,226,.3);
+  animation:modalIn .4s cubic-bezier(.16,1,.3,1) both;
+}
+.modal-air-hero{
+  background:linear-gradient(135deg,#1a0a2e 0%,#0d0618 50%,#0a0d1f 100%);
+  padding:48px 40px 40px;
+  position:relative;overflow:hidden;
+}
+.modal-air-hero::after{content:'✋';position:absolute;right:-10px;bottom:-20px;font-size:8rem;opacity:.06;pointer-events:none}
+.modal-air-close{
+  position:absolute;top:18px;right:18px;
+  width:36px;height:36px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;cursor:pointer;color:var(--branco);transition:background .2s;
+}
+.modal-air-close:hover{background:rgba(255,255,255,.15)}
+.modal-air-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(138,43,226,.15);border:1px solid rgba(138,43,226,.3);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#b06fff;margin-bottom:12px}
+.modal-air-titulo{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--branco);line-height:.95;margin-bottom:12px}
+.modal-air-sub{font-size:1rem;color:rgba(245,245,240,.55);line-height:1.6;max-width:540px}
+
+/* Funcionalidades do modal air */
+.air-features{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:32px}
+.af-card{background:var(--card);border:1px solid var(--borda);padding:20px 18px;transition:border-color .2s}
+.af-card:hover{border-color:rgba(138,43,226,.25)}
+.af-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.af-titulo{font-family:'Fraunces',serif;font-size:.95rem;font-weight:900;color:var(--branco);margin-bottom:6px}
+.af-desc{font-size:.78rem;color:var(--sub);line-height:1.55}
+
+/* Gestos */
+.air-gestos-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.air-gestos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.gesto-card{background:var(--card);border:2px solid var(--borda);padding:22px 20px;transition:all .3s;position:relative}
+.gesto-card:hover{transform:translateY(-3px);border-color:rgba(138,43,226,.3)}
+.gesto-card.destaque-air{border-color:rgba(138,43,226,.5);background:rgba(138,43,226,.04)}
+.gesto-icone{font-size:2rem;margin-bottom:10px;display:block}
+.gesto-nome{font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.gesto-desc{font-size:.82rem;color:var(--sub);line-height:1.55}
+.gesto-mais-usado{
+  position:absolute;top:-1px;right:20px;
+  background:#b06fff;color:#000;
+  font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;
+}
+
+/* Stack técnica */
+.air-stack-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.air-stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.air-stack-item{background:var(--card);border:1px solid var(--borda);padding:16px;display:flex;flex-direction:column;gap:6px;transition:border-color .2s}
+.air-stack-item:hover{border-color:rgba(138,43,226,.25)}
+.asi-label{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(176,111,255,.5)}
+.asi-val{font-size:.9rem;font-weight:600;color:var(--branco)}
+
+/* CTA modal air */
+.modal-air-cta{background:linear-gradient(135deg,#1a0a2e,#0d0618);border-top:1px solid rgba(138,43,226,.3);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal-air-cta-txt h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.modal-air-cta-txt p{font-size:.85rem;color:rgba(245,245,240,.45)}
+.btn-cta-air{
+  padding:14px 32px;background:#b06fff;color:#000;
+  font-size:.9rem;font-weight:700;border:none;cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-cta-air:hover{background:#fff}
+
+/* ══ CARD DETECTOR DE SONOLÊNCIA ══ */
+.proj-card-sono-destaque{
+  background:linear-gradient(135deg,#1a0800 0%,#0d0a00 50%,#0a0d0a 100%);
+  border:1px solid rgba(255,100,0,.3);padding:32px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:all .4s;grid-column:span 2;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+}
+.proj-card-sono-destaque::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,100,0,.05) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.proj-card-sono-destaque:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(255,100,0,.15);border-color:rgba(255,100,0,.55)}
+.proj-card-sono-destaque:hover::before{opacity:1}
+.pcs-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,100,0,.12);border:1px solid rgba(255,100,0,.25);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#ff7c3a;margin-bottom:14px}
+.pcs-titulo{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:var(--branco);line-height:1.05;margin-bottom:12px}
+.pcs-desc{font-size:.92rem;color:rgba(245,245,240,.5);line-height:1.7;margin-bottom:24px}
+.btn-ver-sono{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:#ff6400;color:#000;font-size:.88rem;font-weight:700;border:none;cursor:pointer;transition:all .25s}
+.btn-ver-sono:hover{background:#fff;transform:translateX(4px)}
+.pcs-right{display:flex;flex-direction:column;gap:10px}
+.pcs-feat{background:rgba(255,100,0,.07);border:1px solid rgba(255,100,0,.12);border-radius:4px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.85rem;font-weight:600;color:rgba(245,245,240,.55)}
+.proj-card-sono-destaque:hover .pcs-feat{color:rgba(245,245,240,.85);border-color:rgba(255,100,0,.25)}
+.psf-icon{font-size:1.2rem;flex-shrink:0}
+.pcs-tech-badge{background:rgba(0,0,0,.4);border:1px solid rgba(255,100,0,.18);border-radius:4px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.pcs-tech-label{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,124,58,.5)}
+.pcs-tech-val{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:500;color:#ff7c3a}
+
+/* ══ CARD E-COMMERCE ══ */
+.proj-card-ecom-destaque{
+  background:linear-gradient(135deg,#000d1a 0%,#000a14 50%,#00080f 100%);
+  border:1px solid rgba(0,120,255,.3);padding:32px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:all .4s;grid-column:span 2;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+}
+.proj-card-ecom-destaque::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,120,255,.05) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.proj-card-ecom-destaque:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(0,120,255,.15);border-color:rgba(0,120,255,.5)}
+.proj-card-ecom-destaque:hover::before{opacity:1}
+.pce-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,120,255,.12);border:1px solid rgba(0,120,255,.25);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#3d9aff;margin-bottom:14px}
+.pce-titulo{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:var(--branco);line-height:1.05;margin-bottom:12px}
+.pce-desc{font-size:.92rem;color:rgba(245,245,240,.5);line-height:1.7;margin-bottom:24px}
+.btn-ver-ecom{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:#0078ff;color:#fff;font-size:.88rem;font-weight:700;border:none;cursor:pointer;transition:all .25s}
+.btn-ver-ecom:hover{background:#fff;color:#000;transform:translateX(4px)}
+.pce-right{display:flex;flex-direction:column;gap:10px}
+.pce-feat{background:rgba(0,120,255,.07);border:1px solid rgba(0,120,255,.12);border-radius:4px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.85rem;font-weight:600;color:rgba(245,245,240,.55)}
+.proj-card-ecom-destaque:hover .pce-feat{color:rgba(245,245,240,.85);border-color:rgba(0,120,255,.25)}
+.pef-icon{font-size:1.2rem;flex-shrink:0}
+.pce-tech-badge{background:rgba(0,0,0,.4);border:1px solid rgba(0,120,255,.18);border-radius:4px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.pce-tech-label{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(61,154,255,.5)}
+.pce-tech-val{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:500;color:#3d9aff}
+
+/* ══ MODAL SONOLÊNCIA ══ */
+#modal-sono{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+#modal-sono.aberto{opacity:1;pointer-events:all}
+.modal-sono-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.modal-sono-box{position:relative;z-index:1;background:var(--escuro);width:100%;max-width:860px;max-height:90vh;overflow-y:auto;border:1px solid rgba(255,100,0,.25);animation:modalIn .4s cubic-bezier(.16,1,.3,1) both}
+.modal-sono-hero{background:linear-gradient(135deg,#1a0800 0%,#0d0500 50%,#0a0a00 100%);padding:48px 40px 40px;position:relative;overflow:hidden}
+.modal-sono-hero::after{content:'🚗';position:absolute;right:-10px;bottom:-20px;font-size:8rem;opacity:.06;pointer-events:none}
+.modal-sono-close{position:absolute;top:18px;right:18px;width:36px;height:36px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;color:var(--branco);transition:background .2s}
+.modal-sono-close:hover{background:rgba(255,255,255,.15)}
+.modal-sono-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,100,0,.15);border:1px solid rgba(255,100,0,.3);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#ff7c3a;margin-bottom:12px}
+.modal-sono-titulo{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--branco);line-height:.95;margin-bottom:12px}
+.modal-sono-sub{font-size:1rem;color:rgba(245,245,240,.55);line-height:1.6;max-width:540px}
+.sono-features{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:32px}
+.sf-card{background:var(--card);border:1px solid var(--borda);padding:20px 18px;transition:border-color .2s}
+.sf-card:hover{border-color:rgba(255,100,0,.25)}
+.sf-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.sf-titulo{font-family:'Fraunces',serif;font-size:.95rem;font-weight:900;color:var(--branco);margin-bottom:6px}
+.sf-desc{font-size:.78rem;color:var(--sub);line-height:1.55}
+.sono-alertas-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.sono-alertas{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.alerta-card{background:var(--card);border:2px solid var(--borda);padding:22px 20px;transition:all .3s;position:relative}
+.alerta-card:hover{transform:translateY(-3px)}
+.alerta-card.perigo{border-color:rgba(255,60,60,.4);background:rgba(255,60,60,.03)}
+.alerta-card.atencao{border-color:rgba(255,165,0,.3);background:rgba(255,165,0,.02)}
+.alerta-nivel{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;position:absolute;top:-1px;right:20px}
+.alerta-card.perigo .alerta-nivel{background:#ff3c3c;color:#000}
+.alerta-card.atencao .alerta-nivel{background:#ffa500;color:#000}
+.alerta-icone{font-size:2rem;margin-bottom:10px;display:block}
+.alerta-nome{font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.alerta-desc{font-size:.82rem;color:var(--sub);line-height:1.55}
+.sono-stack-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.sono-stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.sono-stack-item{background:var(--card);border:1px solid var(--borda);padding:16px;display:flex;flex-direction:column;gap:6px;transition:border-color .2s}
+.sono-stack-item:hover{border-color:rgba(255,100,0,.25)}
+.ssi-label{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,124,58,.5)}
+.ssi-val{font-size:.9rem;font-weight:600;color:var(--branco)}
+.modal-sono-cta{background:linear-gradient(135deg,#1a0800,#0d0500);border-top:1px solid rgba(255,100,0,.3);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal-sono-cta-txt h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.modal-sono-cta-txt p{font-size:.85rem;color:rgba(245,245,240,.45)}
+.btn-cta-sono{padding:14px 32px;background:#ff6400;color:#000;font-size:.9rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-cta-sono:hover{background:#fff}
+
+/* ══ MODAL E-COMMERCE ══ */
+#modal-ecom{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+#modal-ecom.aberto{opacity:1;pointer-events:all}
+.modal-ecom-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.modal-ecom-box{position:relative;z-index:1;background:var(--escuro);width:100%;max-width:860px;max-height:90vh;overflow-y:auto;border:1px solid rgba(0,120,255,.25);animation:modalIn .4s cubic-bezier(.16,1,.3,1) both}
+.modal-ecom-hero{background:linear-gradient(135deg,#000d1a 0%,#000810 50%,#00060f 100%);padding:48px 40px 40px;position:relative;overflow:hidden}
+.modal-ecom-hero::after{content:'🛒';position:absolute;right:-10px;bottom:-20px;font-size:8rem;opacity:.06;pointer-events:none}
+.modal-ecom-close{position:absolute;top:18px;right:18px;width:36px;height:36px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;color:var(--branco);transition:background .2s}
+.modal-ecom-close:hover{background:rgba(255,255,255,.15)}
+.modal-ecom-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,120,255,.15);border:1px solid rgba(0,120,255,.3);border-radius:2px;padding:5px 12px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#3d9aff;margin-bottom:12px}
+.modal-ecom-titulo{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--branco);line-height:.95;margin-bottom:12px}
+.modal-ecom-sub{font-size:1rem;color:rgba(245,245,240,.55);line-height:1.6;max-width:540px}
+.ecom-features{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:32px}
+.ef-card{background:var(--card);border:1px solid var(--borda);padding:20px 18px;transition:border-color .2s}
+.ef-card:hover{border-color:rgba(0,120,255,.25)}
+.ef-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.ef-titulo{font-family:'Fraunces',serif;font-size:.95rem;font-weight:900;color:var(--branco);margin-bottom:6px}
+.ef-desc{font-size:.78rem;color:var(--sub);line-height:1.55}
+.ecom-modulos-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.ecom-modulos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.modulo-card{background:var(--card);border:2px solid var(--borda);padding:22px 20px;transition:all .3s;position:relative}
+.modulo-card:hover{transform:translateY(-3px);border-color:rgba(0,120,255,.35)}
+.modulo-icone{font-size:2rem;margin-bottom:10px;display:block}
+.modulo-nome{font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.modulo-desc{font-size:.82rem;color:var(--sub);line-height:1.55}
+.ecom-stack-titulo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--branco);margin-bottom:20px}
+.ecom-stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.ecom-stack-item{background:var(--card);border:1px solid var(--borda);padding:16px;display:flex;flex-direction:column;gap:6px;transition:border-color .2s}
+.ecom-stack-item:hover{border-color:rgba(0,120,255,.25)}
+.esi-label{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(61,154,255,.5)}
+.esi-val{font-size:.9rem;font-weight:600;color:var(--branco)}
+.modal-ecom-cta{background:linear-gradient(135deg,#000d1a,#000810);border-top:1px solid rgba(0,120,255,.3);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal-ecom-cta-txt h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--branco);margin-bottom:4px}
+.modal-ecom-cta-txt p{font-size:.85rem;color:rgba(245,245,240,.45)}
+.btn-cta-ecom{padding:14px 32px;background:#0078ff;color:#fff;font-size:.9rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-cta-ecom:hover{background:#fff;color:#000}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links,.nav-cta{display:none}
+  #hero{flex-direction:column-reverse;padding:100px 20px 60px;gap:40px}
+  .hero-right{align-self:center}
+  .hero-photo-frame{width:260px;height:320px}
+  .section{padding:70px 20px}
+  .divider{margin:0 20px}
+  .sobre-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .diff-grid{grid-template-columns:1fr 1fr}
+  .proj-card-destaque{grid-template-columns:1fr;grid-column:span 1}
+  .proj-card-air-destaque{grid-template-columns:1fr;grid-column:span 1}
+  .proj-card-sono-destaque{grid-template-columns:1fr;grid-column:span 1}
+  .proj-card-ecom-destaque{grid-template-columns:1fr;grid-column:span 1}
+  .air-features{grid-template-columns:1fr 1fr}
+  .air-gestos{grid-template-columns:1fr}
+  .air-stack-grid{grid-template-columns:1fr 1fr}
+  .modal-air-hero{padding:36px 20px 32px}
+  .modal-features{grid-template-columns:1fr 1fr}
+  .modal-planos,.modal-deps{grid-template-columns:1fr}
+  .modal-body{padding:24px 20px}
+  .modal-hero{padding:36px 20px 32px}
+  footer{padding:24px 20px}
+  .footer-inner{flex-direction:column;gap:8px;text-align:center}
+}
+@media(max-width:600px){
+  .diff-grid,.stack-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .modal-features{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Gabriel<span>.</span>Morais</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Fale comigo</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><div class="tag-dot"></div> Disponível para projetos</div>
+    <h1 class="hero-nome">
+      Full Stack<br>
+      <em>&amp; AI</em><br>
+      Developer.
+    </h1>
+    <p class="hero-desc">Transformo ideias em produtos reais — do zero ao deploy. Especializado em aplicações web e computer vision, com uso estratégico de IA como ferramenta.</p>
+    <div class="hero-btns">
+      <a href="#projetos" class="btn-prim">Ver Projetos →</a>
+      <a href="#contato" class="btn-sec">Entrar em Contato</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item"><span class="hs-num">30+</span><span class="hs-label">Projetos entregues</span></div>
+      <div class="hs-item"><span class="hs-num">AI</span><span class="hs-label">Como ferramenta</span></div>
+      <div class="hs-item"><span class="hs-num">0→1</span><span class="hs-label">Conceito ao deploy</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-frame">
+      <img src="IMG_2519.jpeg" alt="Gabriel Morais" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="hero-photo-placeholder" style="display:none"><span>GM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker"></div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre" class="section">
+  <div class="s-eyebrow fade"><div class="s-eyebrow-line"></div><div class="s-eyebrow-txt">01 — Sobre</div></div>
+  <h2 class="s-titulo fade">Desenvolvedor<br><span class="dim">Full Stack &amp; IA.</span></h2>
+  <div class="sobre-grid">
+    <div class="sobre-txt fade">
+      <p>Sou <strong>Gabriel Morais</strong>, desenvolvedor <strong>Full Stack</strong> com foco em <strong>aplicações web</strong> e uso estratégico de <strong>Inteligência Artificial</strong> como ferramenta no desenvolvimento. Atuo com autonomia total — da arquitetura ao deploy em produção.</p>
+      <p>Perfil <strong>autodidata</strong> com experiência prática combinando <span class="hl">Web Apps</span>, <span class="hl">Computer Vision</span> e <span class="hl">integração de IA</span> em soluções integradas e escaláveis.</p>
+      <p>Já desenvolvi <strong>mais de 30 projetos</strong> em diferentes domínios da tecnologia, sempre buscando entregar produtos que fazem diferença real.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-blk fade fd1"><span class="sn">30+</span><span class="sd">Projetos</span></div>
+      <div class="stat-blk fade fd2"><span class="sn">AI</span><span class="sd">Uso Estratégico</span></div>
+      <div class="stat-blk fade fd3"><span class="sn">FS</span><span class="sd">Full Stack</span></div>
+      <div class="stat-blk fade fd4"><span class="sn">0→1</span><span class="sd">End-to-End</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STACK -->
+<section id="stack" class="section">
+  <div class="s-eyebrow fade"><div class="s-eyebrow-line"></div><div class="s-eyebrow-txt">02 — Stack</div></div>
+  <h2 class="s-titulo fade">Tecnologias &amp;<br><span class="dim">Ferramentas.</span></h2>
+  <div class="stack-grid">
+    <div class="stack-card fade">
+      <div class="stack-card-label">Front-end</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="">HTML5</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="">CSS3</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="">JavaScript</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="">React</div>
+    </div>
+    <div class="stack-card fade fd1">
+      <div class="stack-card-label">Back-end</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="">Java</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="">Node.js</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Python</div>
+    </div>
+    <div class="stack-card fade fd2">
+      <div class="stack-card-label">Banco de Dados</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="">MySQL / SQL</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="">Firebase</div>
+    </div>
+    <div class="stack-card fade">
+      <div class="stack-card-label">IA como Ferramenta</div>
+      <div class="tech-row"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#f5c518" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="#f5c518" stroke-width="1.5" stroke-linecap="round"/></svg>Integração de APIs de IA</div>
+      <div class="tech-row"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3" stroke="#f5c518" stroke-width="1.5"/><path d="M3 20c0-4 4-7 9-7s9 3 9 7" stroke="#f5c518" stroke-width="1.5" stroke-linecap="round"/></svg>Computer Vision</div>
+      <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="">Machine Learning</div>
+    </div>
+    <div class="stack-card fade fd1" style="grid-column:span 2">
+      <div class="stack-card-label">Ferramentas</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr)">
+        <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="">Git</div>
+        <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" style="filter:invert(1)">GitHub</div>
+        <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="">Figma</div>
+        <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="">Trello</div>
+        <div class="tech-row"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="">VS Code</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJETOS -->
+<section id="projetos" class="section">
+  <div class="s-eyebrow fade"><div class="s-eyebrow-line"></div><div class="s-eyebrow-txt">03 — Projetos</div></div>
+  <h2 class="s-titulo fade">Trabalhos<br><span class="dim">Selecionados.</span></h2>
+  <div class="proj-grid">
+
+    <!-- DESTAQUE: GeoQuiz -->
+    <div class="proj-card-destaque fade" onclick="abrirModal()">
+      <div class="pcd-left">
+        <div class="pcd-badge">⭐ Projeto em destaque · Produto à venda</div>
+        <div class="pcd-titulo">GeoQuiz<br>Brasil</div>
+        <p class="pcd-desc">Plataforma educacional interativa para aulas de Geografia. Quiz com duelo em tempo real, QR Code, ranking e conquistas — funciona direto no navegador.</p>
+        <button class="btn-entrar">Conhecer o Produto →</button>
+      </div>
+      <div class="pcd-right">
+        <div class="pcd-feat"><span class="pf-icon">⚔️</span>Duelo em tempo real com QR Code</div>
+        <div class="pcd-feat"><span class="pf-icon">🗺️</span>27 estados · 4 modos de jogo</div>
+        <div class="pcd-feat"><span class="pf-icon">🏅</span>Conquistas, combo e modo revisão</div>
+        <div class="pcd-feat"><span class="pf-icon">🌙</span>Modo escuro · Funciona no datashow</div>
+        <div class="pcd-preco-badge">
+          <span class="pp-label">Produto educacional</span>
+          <span class="pp-val">Saiba mais →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESTAQUE: Detector de Sonolência -->
+    <div class="proj-card-sono-destaque fade" onclick="abrirModalSono()">
+      <div>
+        <div class="pcs-badge">🚗 Computer Vision · Segurança Veicular</div>
+        <div class="pcs-titulo">Detector de<br>Sonolência</div>
+        <p class="pcs-desc">Sistema de visão computacional em tempo real que monitora fadiga em motoristas — analisa olhos, bocejo, postura e detecta uso de celular ao volante.</p>
+        <button class="btn-ver-sono">Ver o Projeto →</button>
+      </div>
+      <div class="pcs-right">
+        <div class="pcs-feat"><span class="psf-icon">👁️</span>EAR — detecção de olhos fechados</div>
+        <div class="pcs-feat"><span class="psf-icon">🥱</span>MAR — detecção de bocejo prolongado</div>
+        <div class="pcs-feat"><span class="psf-icon">📱</span>YOLOv8 — celular ao volante</div>
+        <div class="pcs-feat"><span class="psf-icon">📋</span>Log CSV + foto de cada ocorrência</div>
+        <div class="pcs-tech-badge">
+          <span class="pcs-tech-label">Stack</span>
+          <span class="pcs-tech-val">Python · MediaPipe · YOLOv8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESTAQUE: E-commerce -->
+    <div class="proj-card-ecom-destaque fade" onclick="abrirModalEcom()">
+      <div>
+        <div class="pce-badge">🛒 Full Stack · Firebase · React</div>
+        <div class="pce-titulo">Plataforma<br>E-commerce</div>
+        <p class="pce-desc">Sistema completo de loja virtual com autenticação, carrinho dinâmico, integração Firebase em tempo real e painel administrativo de produtos.</p>
+        <button class="btn-ver-ecom">Ver o Projeto →</button>
+      </div>
+      <div class="pce-right">
+        <div class="pce-feat"><span class="pef-icon">🔐</span>Autenticação e perfis de usuário</div>
+        <div class="pce-feat"><span class="pef-icon">🛍️</span>Carrinho com animação de partícula</div>
+        <div class="pce-feat"><span class="pef-icon">⚡</span>Firebase Realtime como backend</div>
+        <div class="pce-feat"><span class="pef-icon">🤖</span>Assistente IA integrado no chat</div>
+        <div class="pce-tech-badge">
+          <span class="pce-tech-label">Stack</span>
+          <span class="pce-tech-val">React · Firebase · Node.js</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESTAQUE: Drawing Air -->
+    <div class="proj-card-air-destaque fade" onclick="abrirModalAir()">
+      <div class="pad-left">
+        <div class="pad-badge">✋ Projeto Open Source · Computer Vision</div>
+        <div class="pad-titulo">Drawing<br>Air</div>
+        <p class="pad-desc">Desenhe no ar com as mãos — sem toque, sem mouse. Rastreamento de gestos em tempo real via câmera com controle total por gestos.</p>
+        <button class="btn-ver-air-dest">Ver o Projeto →</button>
+      </div>
+      <div class="pad-right">
+        <div class="pad-feat"><span class="paf-icon">✋</span>Mão direita desenha, esquerda controla cor</div>
+        <div class="pad-feat"><span class="paf-icon">🎨</span>4 cores + borracha via gestos</div>
+        <div class="pad-feat"><span class="paf-icon">↩️</span>Desfazer com 2 dedos em tempo real</div>
+        <div class="pad-feat"><span class="paf-icon">📐</span>Espessura ajustável por pinça</div>
+        <div class="pad-tech-badge">
+          <span class="pt-label">Stack</span>
+          <span class="pt-val">Python · MediaPipe · OpenCV</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="proj-more fade">
+    <div><div class="pm-label"><strong>Mais de 30 projetos</strong> em diferentes áreas da tecnologia</div><div style="font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub2);margin-top:6px">Web · IA · Mobile · Automação · APIs</div></div>
+    <div class="pm-num">30+</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais" class="section">
+  <div class="s-eyebrow fade"><div class="s-eyebrow-line"></div><div class="s-eyebrow-txt">04 — Diferenciais</div></div>
+  <h2 class="s-titulo fade">Por que<br><span class="dim">Gabriel Morais?</span></h2>
+  <div class="diff-grid">
+    <div class="diff-card fade"><span class="diff-icon">⚡</span><div class="diff-title">Full Stack Completo</div><p class="diff-desc">Domínio da stack inteira — front-end, back-end, banco de dados e deploy. Visão integrada do produto final.</p></div>
+    <div class="diff-card fade fd1"><span class="diff-icon">🚀</span><div class="diff-title">Do Conceito ao Deploy</div><p class="diff-desc">Projetos conduzidos com autonomia total: da ideia à arquitetura, desenvolvimento, testes e entrega em produção.</p></div>
+    <div class="diff-card fade fd2"><span class="diff-icon">🧠</span><div class="diff-title">IA como Ferramenta</div><p class="diff-desc">Uso estratégico de Inteligência Artificial e Computer Vision para potencializar produtos — integrando APIs e modelos em aplicações reais.</p></div>
+    <div class="diff-card fade"><span class="diff-icon">🏗️</span><div class="diff-title">Arquitetura Sólida</div><p class="diff-desc">Código limpo, escalável e bem estruturado. Projetos pensados para crescer sem grandes reescritas.</p></div>
+    <div class="diff-card fade fd1"><span class="diff-icon">📚</span><div class="diff-title">Aprendizado Contínuo</div><p class="diff-desc">Perfil autodidata com alta capacidade de aprendizado acelerado e resolução de problemas de forma independente.</p></div>
+    <div class="diff-card fade fd2"><span class="diff-icon">🎯</span><div class="diff-title">Performance &amp; UX</div><p class="diff-desc">Interfaces rápidas, responsivas e intuitivas. Performance como prioridade técnica, experiência como resultado.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTATO -->
+<section id="contato" class="section">
+  <div class="s-eyebrow fade"><div class="s-eyebrow-line"></div><div class="s-eyebrow-txt">05 — Contato</div></div>
+  <h2 class="s-titulo fade">Vamos<br><span class="dim">Conversar.</span></h2>
+  <div class="contact-grid">
+    <div class="fade">
+      <div class="cf-field"><label class="cf-label">Nome</label><input type="text" id="cf-nome" class="cf-input" placeholder="Seu nome completo"></div>
+      <div class="cf-field"><label class="cf-label">Email</label><input type="email" id="cf-email" class="cf-input" placeholder="seu@email.com"></div>
+      <div class="cf-field"><label class="cf-label">Mensagem</label><textarea id="cf-mensagem" class="cf-textarea" placeholder="Descreva seu projeto ou ideia..."></textarea></div>
+      <button class="cf-submit" id="cf-btn" onclick="enviarContato()">Enviar Mensagem →</button>
+      <div id="cf-feedback" style="margin-top:12px;font-size:.85rem;font-weight:600;display:none"></div>
+    </div>
+    <div class="contact-links fade fd2">
+      <a href="https://www.linkedin.com/in/gabrielmorsdev/" target="_blank" class="c-link">
+        <div class="c-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#0077B5"/><path d="M7 10v8M7 7v.01M12 18v-5c0-1.1.9-2 2-2s2 .9 2 2v5M12 10v8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="c-link-body"><div class="c-link-lbl">LinkedIn</div><div class="c-link-val">linkedin.com/in/gabrielmorais</div></div>
+        <span class="c-link-arr">→</span>
+      </a>
+      <a href="https://wa.me/5537999611925" target="_blank" class="c-link">
+        <div class="c-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#25D366"/><path d="M8 12c0 2.2 1.8 4 4 4 .7 0 1.4-.2 2-.5l2 .5-.5-2c.3-.6.5-1.3.5-2 0-2.2-1.8-4-4-4s-4 1.8-4 4z" fill="#fff"/></svg></div>
+        <div class="c-link-body"><div class="c-link-lbl">WhatsApp</div><div class="c-link-val">(37) 99961-1925</div></div>
+        <span class="c-link-arr">→</span>
+      </a>
+      <a href="https://github.com/GabrielMorais-Dev" target="_blank" class="c-link">
+        <div class="c-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#181717"/><path d="M12 6C8.69 6 6 8.69 6 12c0 2.65 1.72 4.9 4.1 5.7.3.05.41-.13.41-.29v-1.02c-1.67.36-2.02-.81-2.02-.81-.27-.7-.67-.88-.67-.88-.55-.37.04-.36.04-.36.61.04.93.62.93.62.54.93 1.41.66 1.76.5.05-.39.21-.66.38-.81-1.34-.15-2.74-.67-2.74-2.97 0-.66.24-1.19.62-1.61-.06-.15-.27-.76.06-1.59 0 0 .5-.16 1.65.62a5.7 5.7 0 0 1 3 0c1.14-.78 1.65-.62 1.65-.62.33.83.12 1.44.06 1.59.39.42.62.95.62 1.61 0 2.31-1.41 2.82-2.75 2.97.22.19.41.56.41 1.13v1.67c0 .16.11.35.41.29A6 6 0 0 0 18 12c0-3.31-2.69-6-6-6z" fill="#fff"/></svg></div>
+        <div class="c-link-body"><div class="c-link-lbl">GitHub</div><div class="c-link-val">github.com/GabrielMorais-Dev</div></div>
+        <span class="c-link-arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Gabriel<span>.</span>Morais</div>
+    <div class="footer-copy">© 2025 — Full Stack Developer &amp; AI-Driven</div>
+  </div>
+</footer>
+
+<!-- ════ MODAL GEOQUIZ ════ -->
+<div id="modal-geo" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" onclick="fecharModal()"></div>
+  <div class="modal-box">
+
+    <!-- Hero do modal -->
+    <div class="modal-hero">
+      <button class="modal-close" onclick="fecharModal()">✕</button>
+      <div class="modal-badge">🇧🇷 Ferramenta Educacional · Geografia · Fundamental II</div>
+      <h2 class="modal-titulo">GeoQuiz<br>Brasil</h2>
+      <p class="modal-sub">A aula de geografia que os alunos pedem pra repetir. Quiz interativo com duelo em tempo real, QR Code, conquistas e muito mais — sem instalar nada.</p>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- Funcionalidades -->
+      <div class="modal-features">
+        <div class="mf-card"><span class="mf-icon">⚔️</span><div class="mf-titulo">Duelo em Tempo Real</div><p class="mf-desc">2 alunos competem pelo celular. Professor gera QR Code e projeta o placar no telão.</p></div>
+        <div class="mf-card"><span class="mf-icon">🗺️</span><div class="mf-titulo">27 Estados Cobertos</div><p class="mf-desc">Sigla, capital, região e modo misto. Mini mapa mostra onde fica cada estado após a resposta.</p></div>
+        <div class="mf-card"><span class="mf-icon">🔥</span><div class="mf-titulo">Combo &amp; Conquistas</div><p class="mf-desc">Acertos em sequência geram bônus. 8 conquistas desbloqueáveis motivam os alunos.</p></div>
+        <div class="mf-card"><span class="mf-icon">💡</span><div class="mf-titulo">Curiosidades Educativas</div><p class="mf-desc">Cada estado tem um fato curioso que aparece após cada resposta. Aprendizado além da memorização.</p></div>
+        <div class="mf-card"><span class="mf-icon">📚</span><div class="mf-titulo">Modo Revisão</div><p class="mf-desc">Ao fim do quiz, o aluno vê tudo que errou com dados completos e curiosidade do estado.</p></div>
+        <div class="mf-card"><span class="mf-icon">🌙</span><div class="mf-titulo">Modo Escuro + Datashow</div><p class="mf-desc">Ajuste de fonte, modo escuro e sons. Perfeito para projetar em sala de aula.</p></div>
+      </div>
+
+      <!-- Planos -->
+      <div class="modal-planos-titulo">Escolha seu plano</div>
+      <div class="modal-planos">
+        <div class="plano-card">
+          <span class="plano-tag">Para Professores</span>
+          <div class="plano-nome">Individual</div>
+          <div class="plano-preco">R$ 97</div>
+          <span class="plano-periodo">pagamento único · uso pessoal</span>
+          <ul class="plano-lista">
+            <li>Quiz completo com todos os modos</li>
+            <li>Modo Duelo em tempo real</li>
+            <li>Ranking, conquistas e revisão</li>
+            <li>Suporte por WhatsApp 30 dias</li>
+            <li>Atualizações gratuitas por 1 ano</li>
+            <li class="nao">Personalização com logo da escola</li>
+            <li class="nao">Licença para toda a instituição</li>
+          </ul>
+          <button class="btn-plano" onclick="window.open('https://wa.me/5537999611925?text=Quero+o+GeoQuiz+Individual+R%2497')">Quero este plano</button>
+        </div>
+        <div class="plano-card destaque">
+          <div class="plano-mais-vendido">⭐ Mais vendido</div>
+          <span class="plano-tag">Para Escolas</span>
+          <div class="plano-nome">Institucional</div>
+          <div class="plano-preco">R$ 247</div>
+          <span class="plano-periodo">pagamento único · professores ilimitados</span>
+          <ul class="plano-lista">
+            <li>Quiz completo com todos os modos</li>
+            <li>Modo Duelo em tempo real</li>
+            <li>Ranking, conquistas e revisão</li>
+            <li>Suporte por WhatsApp 90 dias</li>
+            <li>Atualizações gratuitas por 2 anos</li>
+            <li><strong>Logo e nome da escola</strong> no sistema</li>
+            <li>Instalação no servidor inclusa</li>
+          </ul>
+          <button class="btn-plano" onclick="window.open('https://wa.me/5537999611925?text=Quero+o+GeoQuiz+Institucional+R%24247')">Quero para minha escola</button>
+        </div>
+      </div>
+
+      <!-- Depoimentos -->
+      <div class="modal-dep-titulo">O que os professores dizem</div>
+      <div class="modal-deps">
+        <div class="dep-card">
+          <div class="dep-estrelas">★★★★★</div>
+          <p class="dep-texto">"Nunca vi meus alunos tão animados em uma aula de geografia. O modo duelo virou tradição toda sexta na minha turma de 7º ano."</p>
+          <div class="dep-autor"><div class="dep-av">A</div><div><div class="dep-nome">Ana Paula S.</div><div class="dep-cargo">Professora de Geografia · 8 anos</div></div></div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-estrelas">★★★★★</div>
+          <p class="dep-texto">"Simples de usar, não precisa instalar nada. Em 5 minutos já estávamos jogando. Os alunos ficaram revisando as capitais espontaneamente."</p>
+          <div class="dep-autor"><div class="dep-av">R</div><div><div class="dep-nome">Roberto M.</div><div class="dep-cargo">Coordenador Pedagógico · Escola Municipal</div></div></div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-estrelas">★★★★★</div>
+          <p class="dep-texto">"A personalização com o nome da escola foi um diferencial. Os alunos sentem que é algo feito especialmente pra eles."</p>
+          <div class="dep-autor"><div class="dep-av">C</div><div><div class="dep-nome">Carla F.</div><div class="dep-cargo">Diretora · Colégio Particular · SP</div></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA final -->
+    <div class="modal-cta">
+      <div class="modal-cta-txt">
+        <h3>Pronto para transformar sua aula? 🇧🇷</h3>
+        <p>Entrega em até 24h · Suporte incluso · Pagamento seguro</p>
+      </div>
+      <button class="btn-cta-modal" onclick="window.open('https://wa.me/5537999611925?text=Olá!+Tenho+interesse+no+GeoQuiz+Brasil')">Falar pelo WhatsApp →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ MODAL DRAWING AIR ════ -->
+<div id="modal-air" role="dialog" aria-modal="true">
+  <div class="modal-air-backdrop" onclick="fecharModalAir()"></div>
+  <div class="modal-air-box">
+
+    <!-- Hero do modal -->
+    <div class="modal-air-hero">
+      <button class="modal-air-close" onclick="fecharModalAir()">✕</button>
+      <div class="modal-air-badge">✋ Computer Vision · Python · Open Source</div>
+      <h2 class="modal-air-titulo">Drawing<br>Air</h2>
+      <p class="modal-air-sub">Desenhe no ar sem tocar em nada — pura visão computacional. Rastreamento de mãos em tempo real transforma gestos humanos em expressão digital.</p>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- Funcionalidades -->
+      <div class="air-features">
+        <div class="af-card"><span class="af-icon">✋</span><div class="af-titulo">Controle Total por Gestos</div><p class="af-desc">Mão direita desenha, mão esquerda controla cor e espessura. Sem teclado, sem mouse — só movimento.</p></div>
+        <div class="af-card"><span class="af-icon">🎨</span><div class="af-titulo">4 Cores + Borracha</div><p class="af-desc">Selecione cor pelo número de dedos levantados na mão esquerda. Mindinho sozinho ativa a borracha.</p></div>
+        <div class="af-card"><span class="af-icon">📐</span><div class="af-titulo">Espessura Dinâmica</div><p class="af-desc">A distância entre polegar e indicador da mão esquerda controla o tamanho do traço em tempo real.</p></div>
+        <div class="af-card"><span class="af-icon">↩️</span><div class="af-titulo">Desfazer Inteligente</div><p class="af-desc">Dois dedos levantados na mão direita desfazem o último traço. Histórico de até 30 estados.</p></div>
+        <div class="af-card"><span class="af-icon">🖐️</span><div class="af-titulo">Limpar Tela</div><p class="af-desc">Feche a mão direita completamente para limpar toda a tela de uma vez — também com histórico.</p></div>
+        <div class="af-card"><span class="af-icon">⚡</span><div class="af-titulo">Suavização de Traço</div><p class="af-desc">Algoritmo de suavização elimina tremores e produz linhas fluidas mesmo com movimentos rápidos.</p></div>
+      </div>
+
+      <!-- Guia de Gestos -->
+      <div class="air-gestos-titulo">Guia de Gestos</div>
+      <div class="air-gestos">
+        <div class="gesto-card destaque-air">
+          <div class="gesto-mais-usado">✏️ Principal</div>
+          <span class="gesto-icone">☝️</span>
+          <div class="gesto-nome">Indicador levantado</div>
+          <p class="gesto-desc">Mão direita com apenas o indicador levantado ativa o modo de desenho. O traço segue a ponta do dedo em tempo real.</p>
+        </div>
+        <div class="gesto-card">
+          <span class="gesto-icone">✌️</span>
+          <div class="gesto-nome">Dois dedos (direita)</div>
+          <p class="gesto-desc">Levante indicador e médio na mão direita para desfazer o último traço. Funciona múltiplas vezes seguidas.</p>
+        </div>
+        <div class="gesto-card">
+          <span class="gesto-icone">🖐️</span>
+          <div class="gesto-nome">Punho fechado (direita)</div>
+          <p class="gesto-desc">Feche completamente a mão direita para limpar a tela inteira com confirmação visual.</p>
+        </div>
+        <div class="gesto-card">
+          <span class="gesto-icone">🤌</span>
+          <div class="gesto-nome">Pinça (esquerda)</div>
+          <p class="gesto-desc">Aproxime ou afaste polegar e indicador na mão esquerda para diminuir ou aumentar a espessura do traço.</p>
+        </div>
+      </div>
+
+      <!-- Stack técnica -->
+      <div class="air-stack-titulo">Stack técnica</div>
+      <div class="air-stack-grid">
+        <div class="air-stack-item"><div class="asi-label">Linguagem</div><div class="asi-val">Python 3.x</div></div>
+        <div class="air-stack-item"><div class="asi-label">Rastreamento de Mãos</div><div class="asi-val">MediaPipe Hands</div></div>
+        <div class="air-stack-item"><div class="asi-label">Visão Computacional</div><div class="asi-val">OpenCV</div></div>
+        <div class="air-stack-item"><div class="asi-label">Processamento Numérico</div><div class="asi-val">NumPy</div></div>
+        <div class="air-stack-item"><div class="asi-label">Captura de Vídeo</div><div class="asi-val">Webcam em tempo real</div></div>
+        <div class="air-stack-item"><div class="asi-label">Tipo de Projeto</div><div class="asi-val">Open Source · Local</div></div>
+      </div>
+
+    </div>
+
+    <!-- CTA final -->
+    <div class="modal-air-cta">
+      <div class="modal-air-cta-txt">
+        <h3>Interessado no projeto? ✋</h3>
+        <p>Código disponível · Integração customizada · Consultoria técnica</p>
+      </div>
+      <button class="btn-cta-air" onclick="window.open('https://wa.me/5537999611925?text=Olá!+Tenho+interesse+no+projeto+Drawing+Air')">Falar pelo WhatsApp →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ MODAL DETECTOR DE SONOLÊNCIA ════ -->
+<div id="modal-sono" role="dialog" aria-modal="true">
+  <div class="modal-sono-backdrop" onclick="fecharModalSono()"></div>
+  <div class="modal-sono-box">
+    <div class="modal-sono-hero">
+      <button class="modal-sono-close" onclick="fecharModalSono()">✕</button>
+      <div class="modal-sono-badge">🚗 Computer Vision · Segurança · Python</div>
+      <h2 class="modal-sono-titulo">Detector de<br>Sonolência</h2>
+      <p class="modal-sono-sub">Monitoramento contínuo de fadiga em motoristas via câmera — detecta olhos fechados, bocejo, cabeça caindo e celular ao volante em tempo real.</p>
+    </div>
+    <div class="modal-body">
+      <div class="sono-features">
+        <div class="sf-card"><span class="sf-icon">👁️</span><div class="sf-titulo">EAR — Eye Aspect Ratio</div><p class="sf-desc">Calcula a abertura ocular frame a frame. Alerta quando olhos ficam fechados por mais de 0,6 segundos.</p></div>
+        <div class="sf-card"><span class="sf-icon">🥱</span><div class="sf-titulo">MAR — Mouth Aspect Ratio</div><p class="sf-desc">Mede a abertura da boca para detectar bocejos prolongados, sinal clínico de fadiga aguda.</p></div>
+        <div class="sf-card"><span class="sf-icon">📐</span><div class="sf-titulo">Head Drop Detection</div><p class="sf-desc">Âncora no nariz rastreia queda da cabeça. Alerta quando o ângulo ultrapassa o limiar configurado.</p></div>
+        <div class="sf-card"><span class="sf-icon">📱</span><div class="sf-titulo">Detecção de Celular</div><p class="sf-desc">YOLOv8 identifica o celular na cena. Processa 1 a cada 8 frames para manter alta performance.</p></div>
+        <div class="sf-card"><span class="sf-icon">📋</span><div class="sf-titulo">Log Automático</div><p class="sf-desc">Cada ocorrência gera uma foto JPG e uma linha no CSV com timestamp, tipo de alerta e caminho da imagem.</p></div>
+        <div class="sf-card"><span class="sf-icon">🔊</span><div class="sf-titulo">Alarme Sonoro</div><p class="sf-desc">Bipe de 2500Hz disparado em thread separada para não bloquear o loop de vídeo. Intervalo configurável.</p></div>
+      </div>
+      <div class="sono-alertas-titulo">Níveis de Alerta</div>
+      <div class="sono-alertas">
+        <div class="alerta-card perigo">
+          <span class="alerta-nivel">⛔ Perigo</span>
+          <span class="alerta-icone">😴</span>
+          <div class="alerta-nome">Olhos Fechados</div>
+          <p class="alerta-desc">EAR abaixo de 0,18 por mais de 0,6s. Borda vermelha na tela + alarme sonoro imediato + registro de ocorrência.</p>
+        </div>
+        <div class="alerta-card perigo">
+          <span class="alerta-nivel">⛔ Perigo</span>
+          <span class="alerta-icone">📱</span>
+          <div class="alerta-nome">Celular Detectado</div>
+          <p class="alerta-desc">YOLOv8 com confiança acima de 45% na classe "cell phone". Partículas visuais sobre o objeto + alarme.</p>
+        </div>
+        <div class="alerta-card atencao">
+          <span class="alerta-nivel">⚠️ Atenção</span>
+          <span class="alerta-icone">🥱</span>
+          <div class="alerta-nome">Bocejo Prolongado</div>
+          <p class="alerta-desc">MAR acima de 0,45 por mais de 0,8s. HUD laranja na tela com registro da ocorrência em CSV.</p>
+        </div>
+        <div class="alerta-card atencao">
+          <span class="alerta-nivel">⚠️ Atenção</span>
+          <span class="alerta-icone">😶</span>
+          <div class="alerta-nome">Cabeça Caindo</div>
+          <p class="alerta-desc">Queixo desce além do limiar proporcional ao rosto. Contador de frames garante que não seja falso positivo.</p>
+        </div>
+      </div>
+      <div class="sono-stack-titulo">Stack técnica</div>
+      <div class="sono-stack-grid">
+        <div class="sono-stack-item"><div class="ssi-label">Linguagem</div><div class="ssi-val">Python 3.x</div></div>
+        <div class="sono-stack-item"><div class="ssi-label">Landmarks Faciais</div><div class="ssi-val">MediaPipe Face Mesh</div></div>
+        <div class="sono-stack-item"><div class="ssi-label">Detecção de Objetos</div><div class="ssi-val">YOLOv8n (Ultralytics)</div></div>
+        <div class="sono-stack-item"><div class="ssi-label">Visão Computacional</div><div class="ssi-val">OpenCV</div></div>
+        <div class="sono-stack-item"><div class="ssi-label">Registro de Dados</div><div class="ssi-val">CSV + JPG por evento</div></div>
+        <div class="sono-stack-item"><div class="ssi-label">Tipo de Projeto</div><div class="ssi-val">Tempo Real · Local</div></div>
+      </div>
+    </div>
+    <div class="modal-sono-cta">
+      <div class="modal-sono-cta-txt">
+        <h3>Interessado no projeto? 🚗</h3>
+        <p>Integração customizada · Consultoria técnica · Código disponível</p>
+      </div>
+      <button class="btn-cta-sono" onclick="window.open('https://wa.me/5537999611925?text=Olá!+Tenho+interesse+no+projeto+Detector+de+Sonolência')">Falar pelo WhatsApp →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ MODAL E-COMMERCE ════ -->
+<div id="modal-ecom" role="dialog" aria-modal="true">
+  <div class="modal-ecom-backdrop" onclick="fecharModalEcom()"></div>
+  <div class="modal-ecom-box">
+    <div class="modal-ecom-hero">
+      <button class="modal-ecom-close" onclick="fecharModalEcom()">✕</button>
+      <div class="modal-ecom-badge">🛒 Full Stack · Firebase · React · IA</div>
+      <h2 class="modal-ecom-titulo">Plataforma<br>E-commerce</h2>
+      <p class="modal-ecom-sub">Loja virtual completa — do carrinho ao painel admin. Firebase como backend em tempo real, assistente IA integrado e animações premium.</p>
+    </div>
+    <div class="modal-body">
+      <div class="ecom-features">
+        <div class="ef-card"><span class="ef-icon">🔐</span><div class="ef-titulo">Autenticação Completa</div><p class="ef-desc">Login, cadastro e perfis de usuário com Firebase Auth. Sessão persistente e proteção de rotas privadas.</p></div>
+        <div class="ef-card"><span class="ef-icon">🛍️</span><div class="ef-titulo">Carrinho Dinâmico</div><p class="ef-desc">Adição com animação de partícula voando ao ícone do carrinho. Contador com bump animation e toast notification.</p></div>
+        <div class="ef-card"><span class="ef-icon">⚡</span><div class="ef-titulo">Firebase Realtime</div><p class="ef-desc">Produtos, categorias e pedidos sincronizados em tempo real. API REST em Flask para operações CRUD completas.</p></div>
+        <div class="ef-card"><span class="ef-icon">🤖</span><div class="ef-titulo">IA Assistente</div><p class="ef-desc">Chat integrado com motor de similaridade por tokens. Responde dúvidas de frete, garantia e pagamento 24/7.</p></div>
+        <div class="ef-card"><span class="ef-icon">🍪</span><div class="ef-titulo">LGPD — Cookies</div><p class="ef-desc">Banner de consentimento com aceite/recusa. Scripts de rastreamento carregados apenas após consentimento.</p></div>
+        <div class="ef-card"><span class="ef-icon">📦</span><div class="ef-titulo">Painel Admin</div><p class="ef-desc">CRUD de produtos e categorias via API Flask + SQLite. Endpoints para criar, editar, listar e deletar.</p></div>
+      </div>
+      <div class="ecom-modulos-titulo">Módulos do Sistema</div>
+      <div class="ecom-modulos">
+        <div class="modulo-card">
+          <span class="modulo-icone">🎨</span>
+          <div class="modulo-nome">Frontend</div>
+          <p class="modulo-desc">HTML/CSS/JS puro com design system dark (preto + roxo). Animações CSS, scroll reveal, partículas e micro-interações.</p>
+        </div>
+        <div class="modulo-card">
+          <span class="modulo-icone">⚙️</span>
+          <div class="modulo-nome">Backend API</div>
+          <p class="modulo-desc">Flask + SQLite com rotas REST para produtos e categorias. CORS habilitado para integração com o frontend.</p>
+        </div>
+        <div class="modulo-card">
+          <span class="modulo-icone">🧠</span>
+          <div class="modulo-nome">Motor de IA</div>
+          <p class="modulo-desc">Similaridade por unigramas e bigramas sem dependências externas. Base de conhecimento editável em .txt.</p>
+        </div>
+        <div class="modulo-card">
+          <span class="modulo-icone">☁️</span>
+          <div class="modulo-nome">Firebase Hosting</div>
+          <p class="modulo-desc">Deploy do frontend no Firebase Hosting com configuração de reescrita e domínio customizado via firebase.json.</p>
+        </div>
+      </div>
+      <div class="ecom-stack-titulo">Stack técnica</div>
+      <div class="ecom-stack-grid">
+        <div class="ecom-stack-item"><div class="esi-label">Frontend</div><div class="esi-val">HTML · CSS · JavaScript</div></div>
+        <div class="ecom-stack-item"><div class="esi-label">Backend</div><div class="esi-val">Python · Flask · SQLite</div></div>
+        <div class="ecom-stack-item"><div class="esi-label">Banco de Dados</div><div class="esi-val">Firebase Realtime + SQLite</div></div>
+        <div class="ecom-stack-item"><div class="esi-label">Autenticação</div><div class="esi-val">Firebase Auth</div></div>
+        <div class="ecom-stack-item"><div class="esi-label">Deploy</div><div class="esi-val">Firebase Hosting</div></div>
+        <div class="ecom-stack-item"><div class="esi-label">IA Assistente</div><div class="esi-val">Motor próprio · NLP simples</div></div>
+      </div>
+    </div>
+    <div class="modal-ecom-cta">
+      <div class="modal-ecom-cta-txt">
+        <h3>Quer um e-commerce assim? 🛒</h3>
+        <p>Desenvolvimento completo · Deploy incluso · Suporte após entrega</p>
+      </div>
+      <button class="btn-cta-ecom" onclick="window.open('https://wa.me/5537999611925?text=Olá!+Tenho+interesse+no+projeto+E-commerce')">Falar pelo WhatsApp →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ TICKER ══
+const items=['Full Stack Development','Inteligência Artificial','Computer Vision','Machine Learning','React & Node.js','Python & OpenCV','Firebase & SQL','30+ Projetos','UI/UX Design','Deploy & DevOps'];
+const tk=document.getElementById('ticker');
+tk.innerHTML=[...items,...items,...items,...items].map(i=>`<span class="ticker-item"><span class="ticker-sep">◆</span>${i}</span>`).join('');
+
+// ══ SCROLL REVEAL ══
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.08});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// ══ MODAL ══
+function abrirModal(){
+  const m=document.getElementById('modal-geo');
+  m.classList.add('aberto');
+  document.body.style.overflow='hidden';
+}
+function fecharModal(){
+  const m=document.getElementById('modal-geo');
+  m.classList.remove('aberto');
+  document.body.style.overflow='';
+}
+// ══ MODAL AIR ══
+function abrirModalAir(){
+  const m=document.getElementById('modal-air');
+  m.classList.add('aberto');
+  document.body.style.overflow='hidden';
+}
+function fecharModalAir(){
+  const m=document.getElementById('modal-air');
+  m.classList.remove('aberto');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){fecharModal();fecharModalAir();fecharModalSono();fecharModalEcom();}});
+
+// ══ MODAL SONOLÊNCIA ══
+function abrirModalSono(){
+  document.getElementById('modal-sono').classList.add('aberto');
+  document.body.style.overflow='hidden';
+}
+function fecharModalSono(){
+  document.getElementById('modal-sono').classList.remove('aberto');
+  document.body.style.overflow='';
+}
+
+// ══ MODAL E-COMMERCE ══
+function abrirModalEcom(){
+  document.getElementById('modal-ecom').classList.add('aberto');
+  document.body.style.overflow='hidden';
+}
+function fecharModalEcom(){
+  document.getElementById('modal-ecom').classList.remove('aberto');
+  document.body.style.overflow='';
+}
+
+// ══ NAV SCROLL ══
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  nav.style.boxShadow=window.scrollY>40?'0 4px 30px rgba(0,0,0,.5)':'none';
+});
+
+// ══ SMOOTH SCROLL ══
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+
+// ══ EMAILJS CONFIG ══
+// 1) Crie uma conta gratuita em https://www.emailjs.com
+// 2) Crie um Email Service (Gmail, etc.) e copie o Service ID
+// 3) Crie um Email Template com as variáveis: {{nome}}, {{email}}, {{mensagem}}
+// 4) Substitua os valores abaixo pelos seus IDs reais
+const EMAILJS_PUBLIC_KEY  = 'JJsofA6xx5eKE5BDo';
+const EMAILJS_SERVICE_ID  = 'service_wu4sm55';
+const EMAILJS_TEMPLATE_ID = 'template_7l6m54u';
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+function enviarContato(){
+  const nome     = document.getElementById('cf-nome').value.trim();
+  const email    = document.getElementById('cf-email').value.trim();
+  const mensagem = document.getElementById('cf-mensagem').value.trim();
+  const btn      = document.getElementById('cf-btn');
+  const feedback = document.getElementById('cf-feedback');
+
+  if(!nome || !email || !mensagem){
+    feedback.style.display='block';
+    feedback.style.color='#ff6b6b';
+    feedback.textContent='⚠️ Preencha todos os campos antes de enviar.';
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent='Enviando...';
+  feedback.style.display='none';
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    nome, email, mensagem
+  }).then(()=>{
+    feedback.style.display='block';
+    feedback.style.color='var(--amarelo)';
+    feedback.textContent='✅ Mensagem enviada com sucesso! Responderei em breve.';
+    btn.textContent='Mensagem Enviada ✓';
+    document.getElementById('cf-nome').value='';
+    document.getElementById('cf-email').value='';
+    document.getElementById('cf-mensagem').value='';
+    setTimeout(()=>{btn.disabled=false;btn.textContent='Enviar Mensagem →';},4000);
+  }).catch(err=>{
+    feedback.style.display='block';
+    feedback.style.color='#ff6b6b';
+    feedback.textContent='❌ Erro ao enviar. Tente pelo WhatsApp ou verifique as configurações do EmailJS.';
+    console.error('EmailJS error:',err);
+    btn.disabled=false;
+    btn.textContent='Enviar Mensagem →';
+  });
+}
+</script>
+</body>
+</html>
